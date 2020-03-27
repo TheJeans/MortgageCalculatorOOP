@@ -1,6 +1,3 @@
-import java.text.NumberFormat;
-import java.util.Scanner;
-
 /**
  * PT 3
  * Further continuation of "Mortgage Calculator" with OOP this time.
@@ -17,60 +14,17 @@ public class Main {
         /**
          * Collect inputs from user
          */
-        int principal = (int) readNumber("What is the principal?: $", 1000, 1_000_000);
-        double interest = readNumber("What is the annual interest rate?: ", 1, 30);
-        int years = (int) readNumber("What is the period (in years)?: ", 1, 30);
+        int principal = (int) Console.readNumber("What is the principal?: $", 1000, 1_000_000);
+        double interest = Console.readNumber("What is the annual interest rate?: ", 1, 30);
+        int years = (int) Console.readNumber("What is the period (in years)?: ", 1, 30);
 
 
         /**
          * Call methods and display answers
          */
-        printMortgage(principal, interest, years);
-        printPaymentSchedule(principal, interest, years);
+        MortgageReport.printMortgage(principal, interest, years);
+        MortgageReport.printPaymentSchedule(principal, interest, years);
 
-
-    }
-
-    public static double readNumber(String prompt, double min, double max){
-        /**
-         * Takes the desired prompt, min, and max.
-         * Creates the scanner and proceeds into the loop.
-         * Prints the prompt and takes in the input value
-         * if the input(value) is within the min and max range
-         * it breaks out of the loop and returns the value.
-         * Otherwise, it will tell the user to input a value
-         * between min and max until they do so.
-         */
-        Scanner input = new Scanner(System.in);
-        double value;
-        while (true) {
-            System.out.print(prompt);
-            value = input.nextDouble();
-            if (value >= min && value <= max) {
-                break;
-            }
-            System.out.println("Enter a value between " + min + " and " + max);
-        }
-        return value;
-    }
-
-    public static void printMortgage(int principal, double interest, int years){
-        double mortgage = mortgage(principal, interest, years);
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println();
-        System.out.println("MORTGAGE");
-        System.out.println("--------");
-        System.out.println("Monthly Payments: " + mortgageFormatted);
-    }
-
-    public static void printPaymentSchedule(int principal, double interest, int years){
-        System.out.println();
-        System.out.println("PAYMENT SCHEDULE");
-        System.out.println("----------------");
-        for (int month = 1; month <= years * monthsInYear; month++) {
-            double balance = balance(principal, interest, years, month);
-            System.out.println(NumberFormat.getCurrencyInstance().format(balance));
-        }
     }
 
 
