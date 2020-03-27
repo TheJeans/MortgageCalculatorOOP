@@ -2,7 +2,7 @@ import java.text.NumberFormat;
 
 public class MortgageReport {
     public static void printMortgage(int principal, double interest, int years){
-        double mortgage = Main.mortgage(principal, interest, years);
+        double mortgage = MortgageCalculator.mortgage(principal, interest, years);
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
         System.out.println();
         System.out.println("MORTGAGE");
@@ -15,7 +15,7 @@ public class MortgageReport {
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("----------------");
         for (int month = 1; month <= years * Main.monthsInYear; month++) {
-            double balance = Main.balance(principal, interest, years, month);
+            double balance = MortgageCalculator.balance(principal, interest, years, month);
             System.out.println(NumberFormat.getCurrencyInstance().format(balance));
         }
     }
