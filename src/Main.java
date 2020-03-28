@@ -6,8 +6,6 @@
  * the balance after every months payment.
  */
 public class Main {
-    final static int monthsInYear = 12;
-    final static int percent = 100;
 
     public static void main(String[] args) {
 
@@ -19,11 +17,16 @@ public class Main {
         int years = (int) Console.readNumber("What is the period (in years)?: ", 1, 30);
 
 
+        var calculator = new MortgageCalculator(principal, interest, years);
+
+        var report = new MortgageReport(calculator);
+
+
         /**
          * Call methods and display answers
          */
-        MortgageReport.printMortgage(principal, interest, years);
-        MortgageReport.printPaymentSchedule(principal, interest, years);
+        report.printMortgage();
+        report.printPaymentSchedule();
 
     }
 
